@@ -21,13 +21,16 @@
       <li><a href="#contact">연락</a></li>
     </ul>
   </nav>
-  <section class="hero" id="home">
+  <section class="hero" id="home" style="background:linear-gradient(90deg,#e3f2fd 60%,#fff 100%);">
     <div class="hero-text">
-      <h1>줄 서는 시간, 데이터가 되어 나를 도와준다.</h1>
-      <p>ZeroQ는 대학 공간의 혼잡도를 AI로 예측하고, 시간 낭비 없는 공간 이용을 돕는 플랫폼입니다.</p>
+      <h1>⏳ ZeroQ: 줄 서는 시간을 줄이다</h1>
+      <p>사진 하나로 공간 혼잡도를 예측하고, 더 똑똑하게 캠퍼스 생활을 누려보세요.</p>
+      <div class="cta-btns">
+        <a href="#demo" class="cta">혼잡도 확인하기</a>
+        <a href="#features" class="cta secondary">ZeroQ란?</a>
+      </div>
     </div>
     <img src="campus-crowd.jpg" alt="캠퍼스 혼잡 이미지" class="banner-img"/>
-    <img src="app-mockup.png" alt="앱 목업" class="app-mockup"/>
   </section>
 </header>
 <main>
@@ -39,8 +42,27 @@
       <div class="feature"><span class="icon">⏳</span><b>시간 거래</b><br>포인트로 자리/시간 거래(계획)</div>
     </div>
   </section>
+  <section id="service" class="section service">
+    <h2>서비스 소개</h2>
+    <ul>
+      <li>어떤 문제를 해결하나요? → 대기 공간의 혼잡도 예측, 시간 절약</li>
+      <li>ZeroQ는 어떻게 작동하나요? → 사진+입력 → AI 추론 → 점수화 → 대시보드</li>
+      <li>누가 사용할 수 있나요? → 대학생, 교수, 동아리 등</li>
+    </ul>
+    <img src="data-flow-diagram.png" alt="서비스 흐름도" class="diagram"/>
+  </section>
+  <section id="how" class="section how">
+    <h2>AI 기술 구조</h2>
+    <ul>
+      <li>YOLOv8, 공개 이미지 데이터셋 학습</li>
+      <li>실험용 이미지 기반 혼잡도 추론 방식</li>
+      <li>향후 실시간 스트리밍 연동 계획</li>
+    </ul>
+    <img src="ai-structure.png" alt="AI 모델 구조" class="diagram"/>
+  </section>
   <section id="demo" class="section demo">
     <h2>데모 체험</h2>
+    <p>AI가 사진 속 인원 수를 추정하여 혼잡도를 점수화합니다.</p>
     <form id="demo-form">
       <label>사진 업로드: <input type="file" accept="image/*" /></label>
       <button type="button" onclick="showExample()">예시 사진</button>
@@ -52,39 +74,24 @@
       <div class="gauge-bar">
         <div class="gauge-fill" id="gauge-fill" style="width:60%"></div>
       </div>
-      <div class="gauge-score" id="gauge-score">4점 (줄 6명)</div>
-    </div>
-  </section>
-  <section id="how" class="section how">
-    <h2>AI 기술 구조</h2>
-    <img src="data-flow-diagram.png" alt="데이터 흐름 다이어그램" class="diagram"/>
-    <ol>
-      <li>사용자: 사진 + 정보 업로드</li>
-      <li>YOLOv8 모델: 사람 수 추정</li>
-      <li>점수 매핑 및 DB 저장</li>
-      <li>혼잡도 정보 제공</li>
-    </ol>
-    <div class="ai-extra">
-      <b>모델 설명:</b> YOLOv8 기반 실시간 객체 탐지<br>
-      <b>데이터셋:</b> 캠퍼스 공간/헬스장/카페 등 실제 사진 활용<br>
-      <b>예측 시연:</b> 아래 데모에서 직접 체험 가능
+      <div class="gauge-score" id="gauge-score"><span class="dot dot-red"></span> 4점 (줄 6명)</div>
     </div>
   </section>
   <section id="team" class="section team">
     <h2>팀 소개</h2>
     <table>
       <tr><th>이름</th><th>전공</th><th>역할</th><th>주요 경험</th></tr>
-      <tr><td>너</td><td>컴퓨터공학 / 자율주행</td><td>AI 모델, 웹 기획</td><td>주차공간 탐지, ETRI 협업, 해외 인턴</td></tr>
-      <tr><td>친구</td><td>소프트웨어학과</td><td>데이터 수집, AI 개발</td><td>반도체 공정 시스템 수상, 웹 개발</td></tr>
+      <tr><td>나예영</td><td>컴퓨터공학+자율주행</td><td>AI/웹/논문</td><td>공기질 논문, 대시보드 개발</td></tr>
+      <tr><td>팀원</td><td>소프트웨어학과</td><td>데이터/앱기획</td><td>반도체 공정, 앱 기획</td></tr>
     </table>
     <div class="team-extra">ZeroQ는 대학생의 실제 불편에서 출발해, 데이터와 AI로 캠퍼스 생활을 혁신하고자 합니다.</div>
   </section>
   <section id="future" class="section future">
-    <h2>향후 계획</h2>
+    <h2>향후 계획 및 비즈니스 모델</h2>
     <ul>
-      <li>시간 거래, 제휴 플랫폼 연계 등 기능 확장</li>
-      <li>상권 광고, 프리미엄 서비스 등 수익 모델 도입</li>
-      <li>캠퍼스 외부(상업시설 등)로 서비스 확대</li>
+      <li>ZeroQ는 대학 캠퍼스를 넘어 병원, 헬스장, 카페 등으로 확장됩니다.</li>
+      <li>사용자 참여 리워드 → 광고 수익 구조 도입</li>
+      <li>개인화된 공간 추천 기능 + 친구와 공유 → SNS 확장성</li>
     </ul>
   </section>
   <section id="faq" class="section faq">
@@ -114,13 +121,13 @@ function showExample() {
   document.getElementById('demo-result').innerHTML = '<img src="example-crowd.jpg" style="max-width:300px"/>';
   document.getElementById('gauge-wrap').style.display = 'block';
   document.getElementById('gauge-fill').style.width = '60%';
-  document.getElementById('gauge-score').innerText = '4점 (줄 6명)';
+  document.getElementById('gauge-score').innerHTML = '<span class="dot dot-red"></span> 4점 (줄 6명)';
 }
 document.getElementById('demo-form').onsubmit = function(e){
   e.preventDefault();
   document.getElementById('gauge-wrap').style.display = 'block';
   document.getElementById('gauge-fill').style.width = '60%';
-  document.getElementById('gauge-score').innerText = '4점 (줄 6명)';
+  document.getElementById('gauge-score').innerHTML = '<span class="dot dot-red"></span> 4점 (줄 6명)';
 };
 document.getElementById('feedback-form').onsubmit = function(e){
   e.preventDefault();
