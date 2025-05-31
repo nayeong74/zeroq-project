@@ -1,0 +1,16 @@
+body { font-family: 'Pretendard', Arial, sans-serif; margin:0; background:#f8f9fa; color:#222;}
+header { background:#fff; border-bottom:1px solid #eee; }
+nav { display:flex; justify-content:space-between; align-items:center; padding:1.2em 2em;}
+.logo { font-size:2em; font-weight:bold; color:#1a73e8;}
+nav ul { display:flex; gap:2em; list-style:none; }
+nav a { color:#222; text-decoration:none; font-weight:500;}
+.section { max-width:900px; margin:3em auto; padding:2em; background:#fff; border-radius:16px; box-shadow:0 2px 8px #0001;}
+h2 { color:#1a73e8; }
+.main-banner { display:flex; align-items:center; gap:2em; padding:2em 0;}
+.banner-img { width:320px; border-radius:16px;}
+.banner-content { flex:1; }
+.app-mockup { width:180px; border-radius:16px;}
+table { width:100%; border-collapse:collapse; margin-top:1em;}
+th, td { border:1px solid #eee; padding:0.7em;}
+form { display:flex; gap:1em; align-items:center;}
+button { background:#1a73e8; color:#fff; border:none; padding:0.5em 1.2em; border-radius:6px; cursor:pointer;}
