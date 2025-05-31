@@ -23,8 +23,8 @@
   </nav>
   <section class="hero" id="home" style="background:linear-gradient(90deg,#e3f2fd 60%,#fff 100%);">
     <div class="hero-text">
-      <h1>⏳ ZeroQ: 줄 서는 시간을 줄이다</h1>
-      <p>사진 하나로 공간 혼잡도를 예측하고, 더 똑똑하게 캠퍼스 생활을 누려보세요.</p>
+      <h1>오늘 도서관, 카페, 헬스장 어디가 한산할까?<br>ZeroQ가 알려드려요!</h1>
+      <p>사진 하나로 공간 혼잡도를 예측하고, 더 똑똑하게 캠퍼스 생활을 누려보세요.<br><b>시간을 절약해 삶을 바꾸는 AI 서비스</b></p>
       <div class="cta-btns">
         <a href="#demo" class="cta">혼잡도 확인하기</a>
         <a href="#features" class="cta secondary">ZeroQ란?</a>
@@ -59,22 +59,42 @@
       <li>향후 실시간 스트리밍 연동 계획</li>
     </ul>
     <img src="ai-structure.png" alt="AI 모델 구조" class="diagram"/>
+    <div class="ai-extra" style="margin-top:1em;">
+      <b>예시 분석 결과</b><br>
+      사람 수: 7명<br>
+      공간 면적: 24m²<br>
+      혼잡도 예측: 3.2/5
+    </div>
   </section>
   <section id="demo" class="section demo">
     <h2>데모 체험</h2>
     <p>AI가 사진 속 인원 수를 추정하여 혼잡도를 점수화합니다.</p>
+    <div class="demo-guide">
+      <b>이런 구도로 찍으면 좋아요:</b><br>
+      <img src="guide1.jpg" alt="가이드1" class="demo-guide-img"/>
+      <img src="guide2.jpg" alt="가이드2" class="demo-guide-img"/>
+      <img src="guide3.jpg" alt="가이드3" class="demo-guide-img"/>
+    </div>
     <form id="demo-form">
       <label>사진 업로드: <input type="file" accept="image/*" /></label>
-      <button type="button" onclick="showExample()">예시 사진</button>
+      <button type="button" onclick="showExample(2)">예시1</button>
+      <button type="button" onclick="showExample(4)">예시2</button>
+      <button type="button" onclick="showExample(5)">예시3</button>
       <button type="submit">혼잡도 예측</button>
     </form>
     <div id="demo-result"></div>
     <div class="gauge-wrap" id="gauge-wrap" style="display:none">
-      <div class="gauge-label">혼잡도 점수</div>
+      <div class="gauge-label">혼잡도 결과</div>
       <div class="gauge-bar">
-        <div class="gauge-fill" id="gauge-fill" style="width:60%"></div>
+        <div class="gauge-fill" id="gauge-fill"></div>
       </div>
-      <div class="gauge-score" id="gauge-score"><span class="dot dot-red"></span> 4점 (줄 6명)</div>
+      <div class="gauge-score" id="gauge-score"></div>
+    </div>
+    <div id="ai-result" class="ai-result" style="display:none; margin-top:1em;">
+      <b>AI 분석 결과</b><br>
+      사람 수: <span id="ai-person">7</span>명<br>
+      공간 면적: <span id="ai-area">24</span>m²<br>
+      혼잡도 예측: <span id="ai-pred">3.2</span>/5
     </div>
   </section>
   <section id="team" class="section team">
@@ -97,15 +117,17 @@
   <section id="faq" class="section faq">
     <h2>FAQ</h2>
     <ul>
-      <li><b>Q. 혼잡도 점수는 어떻게 계산되나요?</b><br>AI가 사진에서 사람 수를 추정하고, 사용자 입력을 반영해 점수를 산출합니다.</li>
-      <li><b>Q. 내 사진/정보는 안전하게 보호되나요?</b><br>사진은 혼잡도 예측 후 즉시 폐기되며, 개인정보는 저장하지 않습니다.</li>
-      <li><b>Q. 예측 정확도는 어느 정도인가요?</b><br>초기 MVP 단계로, 정확도는 향후 지속적으로 개선할 예정입니다.</li>
+      <li><b>Q. 데이터는 어떻게 확보하나요?</b><br>사용자 업로드, 캠퍼스 협력, 공개 데이터셋 등 다양한 방식으로 수집합니다.</li>
+      <li><b>Q. AI는 얼마나 정확한가요?</b><br>YOLOv8 등 최신 모델을 활용하며, 지속적으로 개선 중입니다.</li>
+      <li><b>Q. 사용자가 올리는 사진이 거짓이면?</b><br>여러 사용자 입력, 이상치 감지, 관리자 검증 등으로 신뢰도를 높입니다.</li>
+      <li><b>Q. 이 서비스로 어떤 이득을 얻을 수 있나요?</b><br>시간 절약, 스트레스 감소, 공간 효율화 등 실질적 편익을 제공합니다.</li>
+      <li><b>Q. 개인정보는 안전하게 보호되나요?</b><br>사진은 예측 후 즉시 폐기, 개인정보는 저장하지 않습니다.</li>
     </ul>
   </section>
   <section id="contact" class="section contact">
     <h2>연락 및 참여</h2>
     <form id="feedback-form">
-      <label>의견/피드백 남기기:<br><textarea rows="3" style="width:100%"></textarea></label><br>
+      <label>ZeroQ는 어떤 공간에서 유용할까요? 또는 궁금한 점을 남겨주세요!<br><textarea rows="3" style="width:100%"></textarea></label><br>
       <button type="submit">의견 제출</button>
     </form>
     <ul>
@@ -117,17 +139,29 @@
   </section>
 </main>
 <script>
-function showExample() {
-  document.getElementById('demo-result').innerHTML = '<img src="example-crowd.jpg" style="max-width:300px"/>';
+// 혼잡도 단계별 이모지/색상/텍스트
+const crowdLevels = [
+  {score:1, emoji:'😌', color:'#1e88e5', text:'여유로움'},
+  {score:2, emoji:'🙂', color:'#42a5f5', text:'보통'},
+  {score:3, emoji:'😐', color:'#fbc02d', text:'약간 붐빔'},
+  {score:4, emoji:'😣', color:'#fb8c00', text:'혼잡'},
+  {score:5, emoji:'😫', color:'#e53935', text:'매우 혼잡'}
+];
+function showExample(level=4) {
+  const c = crowdLevels[level-1];
+  document.getElementById('demo-result').innerHTML = `<img src="example-crowd${level}.jpg" style="max-width:300px"/>`;
   document.getElementById('gauge-wrap').style.display = 'block';
-  document.getElementById('gauge-fill').style.width = '60%';
-  document.getElementById('gauge-score').innerHTML = '<span class="dot dot-red"></span> 4점 (줄 6명)';
+  document.getElementById('gauge-fill').style.width = (level*20)+'%';
+  document.getElementById('gauge-fill').style.background = c.color;
+  document.getElementById('gauge-score').innerHTML = `<span class="dot" style="background:${c.color}"></span> ${c.emoji} ${c.text} (${level}점)`;
+  document.getElementById('ai-result').style.display = 'block';
+  document.getElementById('ai-person').innerText = (level*2+3);
+  document.getElementById('ai-area').innerText = (level*6+12);
+  document.getElementById('ai-pred').innerText = (level+Math.random()*0.3).toFixed(1);
 }
 document.getElementById('demo-form').onsubmit = function(e){
   e.preventDefault();
-  document.getElementById('gauge-wrap').style.display = 'block';
-  document.getElementById('gauge-fill').style.width = '60%';
-  document.getElementById('gauge-score').innerHTML = '<span class="dot dot-red"></span> 4점 (줄 6명)';
+  showExample(4);
 };
 document.getElementById('feedback-form').onsubmit = function(e){
   e.preventDefault();
