@@ -3,69 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <title>ZeroQ 프로젝트</title>
-  <meta name="viewport" content="width=1200">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <header>
-  <nav>
+  <nav class="navbar">
     <div class="logo">ZeroQ</div>
     <ul>
-      <li><a href="#problem">문제</a></li>
-      <li><a href="#solution">솔루션</a></li>
-      <li><a href="#ai">AI기술</a></li>
+      <li><a href="#home">홈</a></li>
+      <li><a href="#features">주요기능</a></li>
       <li><a href="#demo">데모</a></li>
-      <li><a href="#future">확장</a></li>
-      <li><a href="#team">팀</a></li>
+      <li><a href="#how">AI기술</a></li>
+      <li><a href="#team">팀소개</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact">연락</a></li>
     </ul>
   </nav>
-  <section class="main-banner">
-    <img src="campus-crowd.jpg" alt="캠퍼스 혼잡 이미지" class="banner-img"/>
-    <div class="banner-content">
+  <section class="hero" id="home">
+    <div class="hero-text">
       <h1>줄 서는 시간, 데이터가 되어 나를 도와준다.</h1>
       <p>ZeroQ는 대학 공간의 혼잡도를 AI로 예측하고, 시간 낭비 없는 공간 이용을 돕는 플랫폼입니다.</p>
     </div>
+    <img src="campus-crowd.jpg" alt="캠퍼스 혼잡 이미지" class="banner-img"/>
     <img src="app-mockup.png" alt="앱 목업" class="app-mockup"/>
   </section>
 </header>
-
 <main>
-  <section id="problem" class="section">
-    <h2>기획 배경</h2>
-    <ul>
-      <li>대기 공간의 혼잡도는 사용 전까지 알기 어렵다</li>
-      <li>줄을 서는 시간은 비효율적이고, 선택 기준도 부족하다</li>
-      <li>예시: 시험 기간 도서관 자리, 헬스장, 카페 등</li>
-      <li>기존 솔루션(테이블링, 나우웨이팅)은 대학생 공간엔 미적용</li>
-    </ul>
-  </section>
-
-  <section id="solution" class="section">
-    <h2>ZeroQ 솔루션</h2>
-    <ul>
-      <li>AI로 실시간 혼잡도 예측 (YOLO 기반)</li>
-      <li>사용자 입력 기반 점수화 및 보정</li>
-      <li>시간 거래 기능(계획): 자리 맡기기/대기 요청, 포인트 시스템</li>
-      <li>활용 예시: “지금 공대 헬스장은 점수 4점, 입구 줄 6명 있음”</li>
-    </ul>
-  </section>
-
-  <section id="ai" class="section">
-    <h2>AI 기술 구조</h2>
-    <img src="data-flow-diagram.png" alt="데이터 흐름 다이어그램" class="diagram"/>
-    <ol>
-      <li>사용자: 사진 + 정보 업로드</li>
-      <li>YOLO 모델: 사람 수 추정</li>
-      <li>점수 매핑 및 DB 저장</li>
-      <li>혼잡도 정보 제공</li>
-    </ol>
-    <div class="ai-extra">
-      <p>예측 시연 영상/결과 시각화, 모델 구조 및 데이터셋 설명 포함</p>
+  <section id="features" class="section features">
+    <h2>주요 기능</h2>
+    <div class="feature-list">
+      <div class="feature"><span class="icon">🤖</span><b>혼잡도 예측</b><br>AI가 실시간 공간 혼잡도를 예측</div>
+      <div class="feature"><span class="icon">🪑</span><b>자리 맡기기</b><br>자리 예약/대기 요청 기능</div>
+      <div class="feature"><span class="icon">⏳</span><b>시간 거래</b><br>포인트로 자리/시간 거래(계획)</div>
     </div>
   </section>
-
-  <section id="demo" class="section">
+  <section id="demo" class="section demo">
     <h2>데모 체험</h2>
     <form id="demo-form">
       <label>사진 업로드: <input type="file" accept="image/*" /></label>
@@ -73,31 +47,60 @@
       <button type="submit">혼잡도 예측</button>
     </form>
     <div id="demo-result"></div>
+    <div class="gauge-wrap" id="gauge-wrap" style="display:none">
+      <div class="gauge-label">혼잡도 점수</div>
+      <div class="gauge-bar">
+        <div class="gauge-fill" id="gauge-fill" style="width:60%"></div>
+      </div>
+      <div class="gauge-score" id="gauge-score">4점 (줄 6명)</div>
+    </div>
   </section>
-
-  <section id="future" class="section">
-    <h2>기획안 및 확장 계획</h2>
-    <ul>
-      <li>현재 MVP: 캠퍼스 중심 시연</li>
-      <li>향후: 데이터 확보 → 공간 추천 → 제휴 공간 확대</li>
-      <li>상권 광고, 포인트 교환 플랫폼 연동</li>
-      <li>
-        <a href="slide.pdf" download>발표 슬라이드/PDF 다운로드</a>
-      </li>
-    </ul>
+  <section id="how" class="section how">
+    <h2>AI 기술 구조</h2>
+    <img src="data-flow-diagram.png" alt="데이터 흐름 다이어그램" class="diagram"/>
+    <ol>
+      <li>사용자: 사진 + 정보 업로드</li>
+      <li>YOLOv8 모델: 사람 수 추정</li>
+      <li>점수 매핑 및 DB 저장</li>
+      <li>혼잡도 정보 제공</li>
+    </ol>
+    <div class="ai-extra">
+      <b>모델 설명:</b> YOLOv8 기반 실시간 객체 탐지<br>
+      <b>데이터셋:</b> 캠퍼스 공간/헬스장/카페 등 실제 사진 활용<br>
+      <b>예측 시연:</b> 아래 데모에서 직접 체험 가능
+    </div>
   </section>
-
-  <section id="team" class="section">
+  <section id="team" class="section team">
     <h2>팀 소개</h2>
     <table>
       <tr><th>이름</th><th>전공</th><th>역할</th><th>주요 경험</th></tr>
       <tr><td>너</td><td>컴퓨터공학 / 자율주행</td><td>AI 모델, 웹 기획</td><td>주차공간 탐지, ETRI 협업, 해외 인턴</td></tr>
       <tr><td>친구</td><td>소프트웨어학과</td><td>데이터 수집, AI 개발</td><td>반도체 공정 시스템 수상, 웹 개발</td></tr>
     </table>
+    <div class="team-extra">ZeroQ는 대학생의 실제 불편에서 출발해, 데이터와 AI로 캠퍼스 생활을 혁신하고자 합니다.</div>
   </section>
-
-  <section id="contact" class="section">
+  <section id="future" class="section future">
+    <h2>향후 계획</h2>
+    <ul>
+      <li>시간 거래, 제휴 플랫폼 연계 등 기능 확장</li>
+      <li>상권 광고, 프리미엄 서비스 등 수익 모델 도입</li>
+      <li>캠퍼스 외부(상업시설 등)로 서비스 확대</li>
+    </ul>
+  </section>
+  <section id="faq" class="section faq">
+    <h2>FAQ</h2>
+    <ul>
+      <li><b>Q. 혼잡도 점수는 어떻게 계산되나요?</b><br>AI가 사진에서 사람 수를 추정하고, 사용자 입력을 반영해 점수를 산출합니다.</li>
+      <li><b>Q. 내 사진/정보는 안전하게 보호되나요?</b><br>사진은 혼잡도 예측 후 즉시 폐기되며, 개인정보는 저장하지 않습니다.</li>
+      <li><b>Q. 예측 정확도는 어느 정도인가요?</b><br>초기 MVP 단계로, 정확도는 향후 지속적으로 개선할 예정입니다.</li>
+    </ul>
+  </section>
+  <section id="contact" class="section contact">
     <h2>연락 및 참여</h2>
+    <form id="feedback-form">
+      <label>의견/피드백 남기기:<br><textarea rows="3" style="width:100%"></textarea></label><br>
+      <button type="submit">의견 제출</button>
+    </form>
     <ul>
       <li><a href="https://github.com/nayeong74/zeroq-project" target="_blank">개발 로그(GitHub)</a></li>
       <li><a href="https://notion.so/zeroq" target="_blank">Notion 프로젝트</a></li>
@@ -106,15 +109,24 @@
     </ul>
   </section>
 </main>
-
 <script>
 function showExample() {
   document.getElementById('demo-result').innerHTML = '<img src="example-crowd.jpg" style="max-width:300px"/>';
+  document.getElementById('gauge-wrap').style.display = 'block';
+  document.getElementById('gauge-fill').style.width = '60%';
+  document.getElementById('gauge-score').innerText = '4점 (줄 6명)';
 }
 document.getElementById('demo-form').onsubmit = function(e){
   e.preventDefault();
-  document.getElementById('demo-result').innerHTML = '<b>혼잡도 점수: 4점 (줄 6명)</b>';
-}
+  document.getElementById('gauge-wrap').style.display = 'block';
+  document.getElementById('gauge-fill').style.width = '60%';
+  document.getElementById('gauge-score').innerText = '4점 (줄 6명)';
+};
+document.getElementById('feedback-form').onsubmit = function(e){
+  e.preventDefault();
+  alert('피드백이 제출되었습니다. 감사합니다!');
+  this.reset();
+};
 </script>
 </body>
 </html>
