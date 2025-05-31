@@ -16,6 +16,7 @@
       <li><a href="#features">주요기능</a></li>
       <li><a href="#demo">데모</a></li>
       <li><a href="#how">AI기술</a></li>
+      <li><a href="#region">대학/지역</a></li>
       <li><a href="#team">팀소개</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact">연락</a></li>
@@ -34,6 +35,33 @@
   </section>
 </header>
 <main>
+  <section id="region" class="section region">
+    <h2>대학/지역별 혼잡도 조회</h2>
+    <form id="region-form">
+      <label>지역 선택:
+        <select id="region-select">
+          <option value="">지역 선택</option>
+          <option value="서울">서울</option>
+          <option value="경기">경기</option>
+          <option value="부산">부산</option>
+        </select>
+      </label>
+      <label>대학교 선택:
+        <select id="univ-select">
+          <option value="">대학교 선택</option>
+        </select>
+      </label>
+      <label>장소 선택:
+        <select id="place-select">
+          <option value="">장소 선택</option>
+        </select>
+      </label>
+      <button type="button" onclick="showRegionCrowd()">혼잡도 조회</button>
+    </form>
+    <div id="region-crowd-result" style="margin-top:1em;"></div>
+    <div id="recent-region" style="margin-top:0.7em; color:#888;"></div>
+    <div id="favorite-region" style="margin-top:0.7em; color:#888;"></div>
+  </section>
   <section id="features" class="section features">
     <h2>주요 기능</h2>
     <div class="feature-list">
@@ -139,7 +167,88 @@
   </section>
 </main>
 <script>
-// 혼잡도 단계별 이모지/색상/텍스트
+// 대학/지역별 드롭다운 데이터 예시
+const regionData = {
+  '서울': {
+    '고려대학교': ['중앙도서관', '과학도서관', '카페A'],
+    '성균관대학교': ['삼성학술정보관', '학생회관', '카페B']
+  },
+  '경기': {
+    '아주대학교': ['도서관', '헬스장'],
+    '경기대학교': ['중앙도서관', '카페C']
+  },
+  '부산': {
+    '부산대학교': ['도서관', '카페D']
+  }
+};
+// 최근/즐겨찾기 저장용(로컬스토리지)
+function saveRecent(region, univ, place) {
+  localStorage.setItem('zeroq_recent', JSON.stringify({region,univ,place}));
+  document.getElementById('recent-region').innerText = `최근 방문: ${region} > ${univ} > ${place}`;
+}
+function saveFavorite(region, univ, place) {
+  localStorage.setItem('zeroq_favorite', JSON.stringify({region,univ,place}));
+  document.getElementById('favorite-region').innerText = `즐겨찾기: ${region} > ${univ} > ${place}`;
+}
+document.getElementById('region-select').onchange = function() {
+  const region = this.value;
+  const univSel = document.getElementById('univ-select');
+  univSel.innerHTML = '<option value="">대학교 선택</option>';
+  if(regionData[region]) {
+    Object.keys(regionData[region]).forEach(u => {
+      univSel.innerHTML += `<option value="${u}">${u}</option>`;
+    });
+  }
+  document.getElementById('place-select').innerHTML = '<option value="">장소 선택</option>';
+};
+document.getElementById('univ-select').onchange = function() {
+  const region = document.getElementById('region-select').value;
+  const univ = this.value;
+  const placeSel = document.getElementById('place-select');
+  placeSel.innerHTML = '<option value="">장소 선택</option>';
+  if(regionData[region] && regionData[region][univ]) {
+    regionData[region][univ].forEach(p => {
+      placeSel.innerHTML += `<option value="${p}">${p}</option>`;
+    });
+  }
+};
+function showRegionCrowd() {
+  const region = document.getElementById('region-select').value;
+  const univ = document.getElementById('univ-select').value;
+  const place = document.getElementById('place-select').value;
+  if(region && univ && place) {
+    // 예시 혼잡도 데이터
+    const hour = new Date().getHours();
+    const crowd = Math.floor(Math.abs(Math.sin(hour + place.length)*5))+1;
+    const crowdLevels = [
+      {score:1, emoji:'😌', color:'#1e88e5', text:'여유로움'},
+      {score:2, emoji:'🙂', color:'#42a5f5', text:'보통'},
+      {score:3, emoji:'😐', color:'#fbc02d', text:'약간 붐빔'},
+      {score:4, emoji:'😣', color:'#fb8c00', text:'혼잡'},
+      {score:5, emoji:'😫', color:'#e53935', text:'매우 혼잡'}
+    ];
+    const c = crowdLevels[crowd-1];
+    document.getElementById('region-crowd-result').innerHTML = `<span class="dot" style="background:${c.color}"></span> ${c.emoji} ${c.text} (${crowd}점)`;
+    saveRecent(region, univ, place);
+    document.getElementById('favorite-region').innerHTML = `<button onclick="saveFavorite('${region}','${univ}','${place}')">★ 즐겨찾기</button>`;
+  } else {
+    document.getElementById('region-crowd-result').innerText = '모든 항목을 선택해 주세요.';
+  }
+}
+window.onload = function() {
+  // 최근/즐겨찾기 표시
+  const recent = localStorage.getItem('zeroq_recent');
+  if(recent) {
+    const r = JSON.parse(recent);
+    document.getElementById('recent-region').innerText = `최근 방문: ${r.region} > ${r.univ} > ${r.place}`;
+  }
+  const fav = localStorage.getItem('zeroq_favorite');
+  if(fav) {
+    const f = JSON.parse(fav);
+    document.getElementById('favorite-region').innerText = `즐겨찾기: ${f.region} > ${f.univ} > ${f.place}`;
+  }
+};
+// 이하 기존 데모/혼잡도/피드백 코드 동일
 const crowdLevels = [
   {score:1, emoji:'😌', color:'#1e88e5', text:'여유로움'},
   {score:2, emoji:'🙂', color:'#42a5f5', text:'보통'},
